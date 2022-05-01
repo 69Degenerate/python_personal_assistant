@@ -1,0 +1,94 @@
+<Assistant>:
+    id:g
+    display:dis
+    leb:l
+    ti:clock
+    FloatLayout:
+        pos:0,0
+        size:root.width,root.height
+        # Image:
+        #     id: gif
+        #     source: '2.gif'
+        #     pos: self.pos
+        #     size: self.size
+        #     allow_stretch: True
+
+        Image:
+            source:'4.jpg'
+            allow_stretch:True
+            keep_ratio:False
+        Button:#help button
+            text:'help'
+            font_size:12
+            pos_hint:{'x':.01,'y':.9}
+            size_hint:None,None
+            size:root.width*.07,root.height*.05
+            on_press:g.exe('help')
+        Label:#text lebel
+            id:l
+            text:''
+            text_size:self.size
+            pos_hint:{'x':.4,'y':.5}
+            # center_x: root.center_x
+			# center_y: root.center_y
+            size_hint:None,None
+            size:root.width*.35,root.height*.3
+        Label:#clock
+            id:clock
+            text:''
+            markup:True
+            font_size:20
+            # pos_hint:{'x':.4,'y':.9
+            pos_hint:{'center_x':0.5,'center_y':.97}
+            size_hint:None,None
+            size:root.width*.15,root.height*.07
+        Button:#EXIT button 
+            background_color:(0,0,0,0)
+            pos_hint:{'x':.9,'y':.9}
+            size_hint:None,None
+            size:root.width*.07,root.height*.07
+            on_press:g.exe('quit')
+            Image:
+                source:'1.png'
+                center_x: self.parent.center_x
+				center_y: self.parent.center_y
+                size:root.width*.07,root.height*.07
+
+        TextInput:#text box
+            id:dis
+            text:''
+            font_size:20
+            hint_text:'enter queries here'
+            text_size:self.size
+            pos_hint:{'x':.0,'y':.0}
+            size_hint:None,None
+            size:root.width*.9,root.height*.06002
+            background_color:'white'
+
+
+        Button:#query button
+            text: 'Enter'
+            on_press:g.exe(dis.text)
+            # pos_hint:{'center_x':,'center_y':.1}
+            pos_hint:{'x':.9,'y':.0}
+
+            size_hint:None,None
+            size:root.width*.1,root.height*.06
+            
+        Button:#speak button
+            background_color:(0,0,0,0)
+            on_press:g.off()
+            on_release:g.listen()
+            pos_hint:{'x':.85,'y':.0001}
+            size_hint:None,None
+            size:root.width*.05,root.height*.06
+            Image:
+                id:mic1
+                source:'mic1.png'
+                center_x: self.parent.center_x
+				center_y: self.parent.center_y
+                size:root.width*.04,root.height*.04
+                allow_stretch:False
+                keep_ratio:False
+
+            
