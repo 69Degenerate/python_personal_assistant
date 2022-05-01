@@ -7,6 +7,7 @@ import wikipedia
 import webbrowser
 import os
 import smtplib
+# sas
 import googletrans
 from kivy.app import App as a
 from kivy.uix.button import Button as b
@@ -23,7 +24,7 @@ engine.setProperty('voice',voices[-1].id)
 
 class game(Widget):
     def textt(self,call):
-        self.leb.text=str(call)#
+        self.leb.text=str(call)
         self.ids.mic1.source='mic2.png'
 
     def off(self):
