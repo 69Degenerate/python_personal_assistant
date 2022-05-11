@@ -98,7 +98,7 @@ class Assistant(Widget):
                     strtime= datetime.datetime.now().strftime("%H:%M:%S")
                     self.speak(f"The time is {strtime}")
 
-
+#FOLLOWING CODE PUT IN ANOTHER WINDOW
         elif 'game' in query:
                 self.speak("Welcome to  adventure game")
                 print("THE ADVENTURE GAME")
@@ -154,13 +154,15 @@ class Assistant(Widget):
                     print('Not a valid option. You lose.')
 
                 print("Thank you for trying", name)            
-
+#===========================================================================================================================================
+#FOLLOWING CODE PUT IN ANOTHER WINDOW
 
         elif 'i want to watch movies' in query:
             self.speak("Here list of movies.")
-            print("1)Moonfall\n2)Gangubai\n3)Pawankhind")
+            j="1)Moonfall\n2)Gangubai\n3)Pawankhind"
+            self.leb.text=j
             self.speak(' which movie you want to watch in this.')
-            movie=listen().lower()
+            movie=query
             if 'moonfall' in movie:
              webbrowser.open('https://drive.google.com/file/d/1SEaKYjiQXVLbgJhtOiBSoY6OICwFct5o/view?usp=sharing')   
             elif 'gangubai' in movie:
@@ -171,6 +173,10 @@ class Assistant(Widget):
                     self.speak('starting')
                     time.sleep(3)
                     webbrowser.open('https://youtu.be/iik25wqIuFo')
+#============================================================================================================================
+
+
+
         elif 'help' in query:
                 self.speak('here are some query you can use')
                 h="who are you : for the intoduction of AI \nyoutube : to start youtube in web browser \ntime : to check current time \nwikipedia : to search wikipedia \nquit : to terminate program"
