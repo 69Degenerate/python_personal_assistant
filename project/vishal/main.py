@@ -32,7 +32,7 @@ class game(Widget):
 
 
     def speak(self,audio):
-        self.leb.text=str(audio)
+        self.leb.text=self.leb.text+"\n \n"+str(audio)
         print(audio)
         engine.say(audio)
         engine.runAndWait()
