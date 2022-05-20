@@ -2,13 +2,13 @@ import time
 import pyttsx3
 import speech_recognition as sr
 import datetime
-import pyaudio
+# import pyaudio
 import wikipedia
 import webbrowser
 import os
 import smtplib
 # sas
-import googletrans
+# import googletrans
 from kivy.app import App as a
 from kivy.uix.button import Button as b
 from kivy.uix.widget import Widget
@@ -23,6 +23,9 @@ voices =engine.getProperty('voices')
 engine.setProperty('voice',voices[-1].id)
 
 class game(Widget):
+    def te(self,call):
+        self.leb.text=self.leb.text+'\n'+str(call)
+        self.leb.pos_hint={'x':.0,'y':.1}
     def textt(self,call):
         self.leb.text=str(call)
         self.ids.mic1.source='mic2.png'
@@ -33,6 +36,7 @@ class game(Widget):
 
     def speak(self,audio):
         self.leb.text=self.leb.text+"\n \n"+str(audio)
+        self.leb.pos_hint={'x':.9,'y':.1}
         print(audio)
         engine.say(audio)
         engine.runAndWait()
@@ -99,7 +103,7 @@ class game(Widget):
         elif 'help' in query:
                 self.speak('here are some query you can use')
                 h="who are you : for the intoduction of AI \nyoutube : to start youtube in web browser \ntime : to check current time \nwikipedia : to search wikipedia \nquit : to terminate program"
-                self.leb.text=h
+                self.leb.text=self.leb2.text+h
         elif'who are you' in query:
                     self.speak('I am veronica, i am A.i system of created by self,with love of you, i m a ho,such a disspointment to this dammed world') 
         elif 'quit' in query:
