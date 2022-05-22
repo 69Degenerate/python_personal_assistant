@@ -32,7 +32,7 @@
             pos_hint:{'x':.4,'y':.1}
             # center_x: root.center_x
 			# center_y: root.center_y
-           # size_hint:{.35,.3}#None,None
+            size_hint:None,None
             size:root.width*.35,root.height*.3
         # Label:
         #     id:l2
@@ -41,7 +41,7 @@
         #     pos_hint:{'x':.0,'y':.1}
 
         Label:#clock
-            id:clock
+            id:clock 
             text:''
             markup:True
             font_size:20
@@ -75,8 +75,8 @@
 
         Button:#query button
             text: 'Enter'
-            on_press:g.te(dis.text)
-            on_release:g.exe(dis.text)
+            on_press:g.exe(dis.text)
+            # on_release:g.exe(dis.text)
             # pos_hint:{'center_x':,'center_y':.1}
             pos_hint:{'x':.9,'y':.0}
             size_hint:None,None
