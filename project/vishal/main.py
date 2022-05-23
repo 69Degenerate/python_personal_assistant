@@ -7,7 +7,6 @@ import wikipedia
 import webbrowser
 import os
 import smtplib
-# sas
 import googletrans
 from kivy.app import App as a
 from kivy.uix.button import Button as b
@@ -16,13 +15,23 @@ from kivy.uix.textinput import TextInput
 from kivy.clock import Clock
 from kivy.core.image import Image
 from kivy.animation import Animation
+from kivy.app import App
+from kivy.uix.widget import Widget
+from kivy.lang import Builder
+from kivy.uix.screenmanager import ScreenManager, Screen
 
+
+class WindowManager(ScreenManager):
+	pass
 
 engine =pyttsx3.init()
 voices =engine.getProperty('voices')
 engine.setProperty('voice',voices[-1].id)
 
-class game(Widget):
+class FirstWindow(Screen,Widget):
+    def scr(self,screen):
+        self.ids.f.current=screen
+        self.ids.f.trigger_action(0.2)
     def textt(self,call):
         self.leb.text=str(call)
         self.ids.mic1.source='mic2.png'
@@ -92,14 +101,27 @@ class game(Widget):
         elif 'time' in query:
                     strtime= datetime.datetime.now().strftime("%H:%M:%S")
                     self.speak(f"The time is {strtime}")
+        elif 'next' in query:
+            self.ids.f.trigger_action(0.2)
+            # self.scr("third")
+        elif 'third' in query:
+            self.ids.t.trigger_action(0.2)
+            # self.scr('third')
         elif 'youtube' in query:
                     self.speak('starting')
                     time.sleep(3)
                     webbrowser.open('https://youtu.be/iik25wqIuFo')
         elif 'help' in query:
                 self.speak('here are some query you can use')
-                h="who are you : for the intoduction of AI \nyoutube : to start youtube in web browser \ntime : to check current time \nwikipedia : to search wikipedia \nquit : to terminate program"
-                self.leb.text=h
+                h='''
+who are you : for the intoduction of AI 
+youtube : to start youtube in web browser
+time : to check current time 
+wikipedia : to search wikipedia 
+next:goto the second screen 
+quit : to terminate program
+                '''
+                self.leb.text=self.leb.text+h
         elif'who are you' in query:
                     self.speak('I am veronica, i am A.i system of created by self,with love of you, i m a ho,such a disspointment to this dammed world') 
         elif 'quit' in query:
@@ -118,16 +140,19 @@ class game(Widget):
     def update(self,*args):
         self.ti.text= datetime.datetime.now().strftime("[b]%H:%M[/b]:%S")
     def __init__(self, **kwargs):
-        super(game,self).__init__(**kwargs)
+        super(FirstWindow,self).__init__(**kwargs)
         Clock.schedule_interval(self.update,1)
 
+class SecondWindow(Screen):
+	pass
 
+class ThirdWindow(Screen):
+    pass
 
-class app(a):
-    def build(self):
-        return game()
+kv = Builder.load_file('app.kv')
+class app(App):
+	def build(self):
+		return kv
 
-app().run()
-
-# if __name__=='__main__':
-#     app().run()
+if __name__ == '__main__':
+    app().run()
