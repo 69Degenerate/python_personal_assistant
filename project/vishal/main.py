@@ -66,9 +66,8 @@ class FirstWindow(Screen,Widget):
             k.pause_threshold == 1
             audio=k.listen(source)
         try:
-            print("Recognizing......")
             self.speak("Recognizing......")
-            query=k.recognize_google(audio, language='mar-in')    
+            query=k.recognize_google(audio, language='eng-in')    
             print("user said: ",{query},"\n")
         except Exception as e:
             print("Say that again please....")
