@@ -98,15 +98,26 @@ class FirstWindow(Screen,Widget):
                     except Exception as e:
                         print(e)
                         self.speak("sorry boss ,i am not able get any appropriate result from wikipedia")
-        elif 'time' in query:
-                    strtime= datetime.datetime.now().strftime("%H:%M:%S")
-                    self.speak(f"The time is {strtime}")
+        #=======================================================================================
+        #  Queries for screen manager
+        
         elif 'next' in query:
             self.ids.f.trigger_action(0.2)
             # self.scr("third")
         elif 'third' in query:
             self.ids.t.trigger_action(0.2)
             # self.scr('third')
+        elif 'forth' in query:
+            self.ids.fo.trigger_action(0.2)
+        elif 'fifth' in query:
+            self.ids.fi.trigger_action(0.2)
+        elif 'sixth' in query:
+            self.ids.s.trigger_action(0.2)
+        #=======================================================================================
+        
+        elif 'time' in query:
+                    strtime= datetime.datetime.now().strftime("%H:%M:%S")
+                    self.speak(f"The time is {strtime}")
         elif 'youtube' in query:
                     self.speak('starting')
                     time.sleep(3)
@@ -129,24 +140,35 @@ quit : to terminate program
 
             quit()
         else:
-                self.speak("please give appropriate query")
+            self.speak("please give appropriate query")
 
     def anim(self,widget,*args):
         animate=Animation(background_color=(0,0,0,0),d=1)
         animate.start(widget)
         
 
-
+# =========================================================================
+#  Function for Clock
     def update(self,*args):
         self.ti.text= datetime.datetime.now().strftime("[b]%H:%M[/b]:%S")
     def __init__(self, **kwargs):
         super(FirstWindow,self).__init__(**kwargs)
         Clock.schedule_interval(self.update,1)
+#============================================================================
 
 class SecondWindow(Screen):
 	pass
 
 class ThirdWindow(Screen):
+    pass
+
+class ForthWindow(Screen):
+    pass
+
+class FifthWindow(Screen):
+    pass
+
+class SixthWindow(Screen):
     pass
 
 kv = Builder.load_file('app.kv')
