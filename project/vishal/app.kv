@@ -2,6 +2,9 @@ WindowManager:
 	FirstWindow:
 	SecondWindow:
     ThirdWindow:
+    ForthWindow:
+    FifthWindow:
+    SixthWindow:
 
 <FirstWindow>
     name:"first"
@@ -13,18 +16,46 @@ WindowManager:
     FloatLayout:
         pos:0,0
         size:root.width,root.height
+        
+    #==================================================================
+        # Buttons for screen manager 
         Button:# button to goto second screen
             id:f
-            size:root.width*.0,root.height*.0
+            size_hint:None,None
+            size:root.width*.00001,root.height*.00001
             on_press:
                 app.root.current = "second"
                 root.manager.transition.direction = "left"
-        Button:# button to goto second screen
+        Button:# button to goto third screen
             id:t
-            size:root.width*.0,root.height*.0
+            size_hint:None,None
+            size:root.width*.00001,root.height*.00001
             on_press:
                 app.root.current = "third"
                 root.manager.transition.direction = "left"
+        Button:# button to goto forth screen
+            id:fo
+            size_hint:None,None
+            size:root.width*.00001,root.height*.00001
+            on_press:
+                app.root.current = "forth"
+                root.manager.transition.direction = "left"
+        Button:# button to goto fifth screen
+            id:fi
+            size_hint:None,None
+            size:root.width*.00001,root.height*.00001
+            on_press:
+                app.root.current = "fifth"
+                root.manager.transition.direction = "left"
+        Button:# button to goto sixth screen
+            id:s
+            size_hint:None,None
+            size:root.width*.00001,root.height*.00001
+            on_press:
+                app.root.current = "sixth"
+                root.manager.transition.direction = "left"
+    #=================================================================
+
         Image:
             source:'4.jpg'
             allow_stretch:True
@@ -116,6 +147,40 @@ WindowManager:
         size: root.width, root.height
         Button:
             text:"third button"
+            font_size: 32
+            on_release: 
+                app.root.current = "first"
+                root.manager.transition.direction = "left"
+
+<ForthWindow>:
+    name:'forth'
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+        Button:
+            text:"forth button"
+            font_size: 32
+            on_release: 
+                app.root.current = "first"
+                root.manager.transition.direction = "left"
+<FifthWindow>:
+    name:'fifth'
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+        Button:
+            text:"fifth button"
+            font_size: 32
+            on_release: 
+                app.root.current = "first"
+                root.manager.transition.direction = "left"
+<SixthWindow>:
+    name:'sixth'
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+        Button:
+            text:"sixth button"
             font_size: 32
             on_release: 
                 app.root.current = "first"
