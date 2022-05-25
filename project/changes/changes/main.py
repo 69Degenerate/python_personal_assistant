@@ -1,10 +1,12 @@
 import time
 import pyttsx3
 import speech_recognition as sr
+from kivy.uix.gridlayout import GridLayout
 import datetime
 import pyaudio
 import wikipedia
 import webbrowser
+from kivy.config import Config
 import os
 import smtplib
 import googletrans
@@ -19,6 +21,7 @@ from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
+import game
 
 
 class WindowManager(ScreenManager):
@@ -28,7 +31,10 @@ engine =pyttsx3.init()
 voices =engine.getProperty('voices')
 engine.setProperty('voice',voices[-1].id)
 
-class FirstWindow(Screen,Widget):
+class FirstWindow(Screen):
+    pass
+
+class SecondWindow(Screen,Widget):
     def scr(self,screen):
         self.ids.f.current=screen
         self.ids.f.trigger_action(0.2)
@@ -62,7 +68,7 @@ class FirstWindow(Screen,Widget):
     def listen(self):
         k = sr.Recognizer()
         with sr.Microphone() as source:
-            print("Listening....")
+            self.speak("Listening....")
             k.pause_threshold == 1
             audio=k.listen(source)
         try:
@@ -84,6 +90,12 @@ class FirstWindow(Screen,Widget):
         server.login('amolbrand00@gmail.com','amol@1234#')
         server.sendmail('amolbrand00@gmail.com',to,content)
         server.close()
+    def Alarm(query):
+        TimeHere=open('data.txt','a')
+        TimeHere.write(query)
+        TimeHere.close()
+        os.startfile("C:\\Users\\Amol\\Desktop\\project\\project\\changes\\changes\\Database\\alarm.py")
+     
 
             
     def exe(self,query):
@@ -91,8 +103,9 @@ class FirstWindow(Screen,Widget):
                     try:
                         self.speak('searching Wikipedia....')
                         query= query.replace("wikipedia","")
-                        results = wikipedia.summary(query,sentences=1)
+                        results = wikipedia.summary(query,sentences=50)
                         self.speak("Acording To Wikipedia")
+                        print(results)
                         self.speak(results)
                     except Exception as e:
                         print(e)
@@ -105,7 +118,12 @@ class FirstWindow(Screen,Widget):
             # self.scr("third")
         elif 'third' in query:
             self.ids.t.trigger_action(0.2)
-            # self.scr('third')
+            # self.scr('third')    
+        elif " alarm" in query:
+            self.speak("in which time")
+
+            self.Alarm('set alarm for 5 and 07 ')
+
         elif 'youtube' in query:
                     self.speak('starting')
                     time.sleep(3)
@@ -123,8 +141,10 @@ quit : to terminate program
                 self.leb.text=self.leb.text+h
         elif'who are you' in query:
                     self.speak('I am veronica, i am A.i system of created by self,with love of you, i m a ho,such a disspointment to this dammed world') 
+        
         elif 'quit' in query:
-            self.speak('have a great day')
+
+            self.speak('have a great day')    
 
             quit()
         else:
@@ -139,14 +159,44 @@ quit : to terminate program
     def update(self,*args):
         self.ti.text= datetime.datetime.now().strftime("[b]%H:%M[/b]:%S")
     def __init__(self, **kwargs):
-        super(FirstWindow,self).__init__(**kwargs)
+        super(SecondWindow,self).__init__(**kwargs)
         Clock.schedule_interval(self.update,1)
 
-class SecondWindow(Screen):
-	pass
-
 class ThirdWindow(Screen):
-    pass
+    game.Game()
+
+class FourthWindow(Screen,GridLayout):
+#     import kivy
+# from kivy.app import App
+# kivy.require('1.9.0')
+    Config.set('graphics', 'resizable', 1)
+
+    # class CalcGridLayout(GridLayout):
+    def calculate(self, calculation):
+            if calculation:
+                try:
+                    self.display.text = str(eval(calculation))
+                except Exception:
+                    self.display.text = "Error"
+
+    def delete(self, dele):
+            if dele:
+                try:
+                    self.display.text = str(dele[:-1])
+                except Exception:
+                    self.display.text = "Error"
+
+    def exit(self):
+            quit()
+
+
+    # class CalculatorApp(App):
+    #     def build(self):
+    #         return FourthWindow()
+            
+    # calcApp = CalculatorApp()
+    # calcApp.run()
+
 
 kv = Builder.load_file('app.kv')
 class app(App):

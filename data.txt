@@ -1,0 +1,1 @@
+set alarm for 5 and 2
