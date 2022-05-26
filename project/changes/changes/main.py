@@ -119,7 +119,7 @@ class SecondWindow(Screen,Widget):
             # self.scr("third")
         elif 'third' in query:
             self.ids.t.trigger_action(0.2)
-        elif 'f' in query:
+        elif 'forth' in query:
             self.ids.fo.trigger_action(0.2)
             # self.scr('third')    
         elif " alarm" in query:
