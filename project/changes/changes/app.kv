@@ -38,6 +38,12 @@ WindowManager:
             on_press:
                 app.root.current = "third"
                 root.manager.transition.direction = "left"
+        Button:# button to goto second screen
+            id:fo
+            size:root.width*.0,root.height*.0
+            on_press:
+                app.root.current = "forth"
+                root.manager.transition.direction = "left"
         Image:
             source:'4.jpg'
             allow_stretch:True
@@ -158,112 +164,86 @@ WindowManager:
                 allow_stretch:False
                 keep_ratio:False
                 
-<CustButton@Button>:
-    font_size: 32
+# <CustButton@Button>:
+#     font_size: 32
 <FourthWindow>:
-    # name:"fourth"
-    # BoxLayout:
-    #     orientation: "vertical"
-    #     size: root.width, root.height
-    #     Button:
-    #         text:"forth button"
-    #         font_size: 32
-    #         on_release: 
-    #             app.root.current = "second"
-    #             root.manager.transition.direction = "left"
-        # Custom button
-   
-
-    # Define id so I can refer to the CalcGridLayout
-    # class functions
-    # Display points to the entry widget
-    # <CalcGridLayout>:
-        id: calculator
-        display: entry
+    name:'forth'
+    id: calculator
+    display: entry
+    GridLayout:
         column:4
         rows: 6
         padding: 10
         spacing: 10
-
-        
-
-        # Where input is displayed
+    
         BoxLayout:
             TextInput:
                 id: entry
                 font_size: 32
                 multiline: False
-
-        # When buttons are pressed update the entry
         BoxLayout:
             spacing: 10
-            CustButton:
+            Button:
                 text: "7"
                 on_press: entry.text += self.text
-            CustButton:
+            Button:
                 text: "8"
                 on_press: entry.text += self.text
-            CustButton:
+            Button:
                 text: "9"
                 on_press: entry.text += self.text
-            CustButton:
+            Button:
                 text: "+"
                 on_press: entry.text += self.text
-
         BoxLayout:
             spacing: 10
-            CustButton:
+            Button:
                 text: "4"
                 on_press: entry.text += self.text
-            CustButton:
+            Button:
                 text: "5"
                 on_press: entry.text += self.text
-            CustButton:
+            Button:
                 text: "6"
                 on_press: entry.text += self.text
-            CustButton:
+            Button:
                 text: "-"
                 on_press: entry.text += self.text
-
         BoxLayout:
             spacing: 10
-            CustButton:
+            Button:
                 text: "1"
                 on_press: entry.text += self.text
-            CustButton:
+            Button:
                 text: "2"
                 on_press: entry.text += self.text
-            CustButton:
+            Button:
                 text: "3"
                 on_press: entry.text += self.text
-            CustButton:
+            Button:
                 text: "*"
                 on_press: entry.text += self.text
-
-        # When equals is pressed pass text in the entry
-        # to the calculate function
         BoxLayout:
             spacing: 10
-            CustButton:
+            Button:
                 text: "AC"
                 on_press: entry.text = ""
-            CustButton:
+            Button:
                 text: "0"
                 on_press: entry.text += self.text
-            CustButton:
+            Button:
                 text: "DEL"
                 on_press: calculator.delete(entry.text)
-            CustButton:
+            Button:
                 text: "/"
                 on_press: entry.text += self.text
         BoxLayout:
             spacing:10
-            CustButton:
+            Button:
                 font_size: 25
                 text: "="
                 on_press: calculator.calculate(entry.text)
-            CustButton:
-                column:4
+            Button:
                 text:"EXIT"
                 on_press: calculator.exit()
 
