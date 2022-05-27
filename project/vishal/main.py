@@ -109,7 +109,7 @@ class FirstWindow(Screen,Widget):
         elif 'third' in query:
             self.ids.t.trigger_action(0.2)
             # self.scr('third')
-        elif 'forth' in query:
+        elif 'forth' or 'calculator' in query:
             self.ids.fo.trigger_action(0.2)
         elif 'fifth' in query:
             self.ids.fi.trigger_action(0.2)

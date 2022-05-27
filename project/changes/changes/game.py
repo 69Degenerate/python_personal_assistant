@@ -1,4 +1,4 @@
-from cv2 import logPolar
+# from cv2 import logPolar
 import pyttsx3
 import speech_recognition as sr
 
