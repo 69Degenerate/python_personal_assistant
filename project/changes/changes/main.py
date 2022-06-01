@@ -2,14 +2,15 @@ import time
 import pyttsx3
 import speech_recognition as sr
 from kivy.uix.gridlayout import GridLayout
+from kivy.uix.boxlayout import BoxLayout
 import datetime
-import pyaudio
+# import pyaudio
 import wikipedia
 import webbrowser
 from kivy.config import Config
 import os
 import smtplib
-import googletrans
+# import googletrans
 from kivy.app import App as a
 from kivy.uix.button import Button as b
 from kivy.uix.widget import Widget
@@ -21,7 +22,7 @@ from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
-import game
+# import game
 
 
 class WindowManager(ScreenManager):
@@ -118,6 +119,8 @@ class SecondWindow(Screen,Widget):
             # self.scr("third")
         elif 'third' in query:
             self.ids.t.trigger_action(0.2)
+        elif 'forth' in query:
+            self.ids.fo.trigger_action(0.2)
             # self.scr('third')    
         elif " alarm" in query:
             self.speak("in which time")
@@ -163,39 +166,26 @@ quit : to terminate program
         Clock.schedule_interval(self.update,1)
 
 class ThirdWindow(Screen):
-    game.Game()
+    # game.Game()
+    pass
 
 class FourthWindow(Screen,GridLayout):
-#     import kivy
-# from kivy.app import App
-# kivy.require('1.9.0')
     Config.set('graphics', 'resizable', 1)
-
-    # class CalcGridLayout(GridLayout):
     def calculate(self, calculation):
             if calculation:
                 try:
                     self.display.text = str(eval(calculation))
                 except Exception:
                     self.display.text = "Error"
-
     def delete(self, dele):
             if dele:
                 try:
                     self.display.text = str(dele[:-1])
                 except Exception:
                     self.display.text = "Error"
-
     def exit(self):
             quit()
 
-
-    # class CalculatorApp(App):
-    #     def build(self):
-    #         return FourthWindow()
-            
-    # calcApp = CalculatorApp()
-    # calcApp.run()
 
 
 kv = Builder.load_file('app.kv')

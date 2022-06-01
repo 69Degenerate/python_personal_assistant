@@ -2,14 +2,17 @@ import time
 import pyttsx3
 import speech_recognition as sr
 import datetime
-import pyaudio
+# import pyaudio
 import wikipedia
 import webbrowser
 import os
 import smtplib
-import googletrans
+# import googletrans
+from kivy.config import Config
 from kivy.app import App as a
 from kivy.uix.button import Button as b
+from kivy.uix.gridlayout import GridLayout
+from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.widget import Widget
 from kivy.uix.textinput import TextInput
 from kivy.clock import Clock
@@ -106,7 +109,7 @@ class FirstWindow(Screen,Widget):
         elif 'third' in query:
             self.ids.t.trigger_action(0.2)
             # self.scr('third')
-        elif 'forth' in query:
+        elif 'forth' or 'calculator' in query:
             self.ids.fo.trigger_action(0.2)
         elif 'fifth' in query:
             self.ids.fi.trigger_action(0.2)
@@ -162,7 +165,22 @@ class ThirdWindow(Screen):
     pass
 
 class ForthWindow(Screen):
-    pass
+    # pass
+    Config.set('graphics', 'resizable', 1)
+    def calculate(self, calculation):
+            if calculation:
+                try:
+                    self.display.text = str(eval(calculation))
+                except Exception:
+                    self.display.text = "Error"
+    def delete(self, dele):
+            if dele:
+                try:
+                    self.display.text = str(dele[:-1])
+                except Exception:
+                    self.display.text = "Error"
+    def exit(self):
+            quit()
 
 class FifthWindow(Screen):
     pass
