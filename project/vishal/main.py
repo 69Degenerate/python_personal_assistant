@@ -2,17 +2,14 @@ import time
 import pyttsx3
 import speech_recognition as sr
 import datetime
-# import pyaudio
+import pyaudio
 import wikipedia
 import webbrowser
 import os
 import smtplib
-# import googletrans
-from kivy.config import Config
+import googletrans
 from kivy.app import App as a
 from kivy.uix.button import Button as b
-from kivy.uix.gridlayout import GridLayout
-from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.widget import Widget
 from kivy.uix.textinput import TextInput
 from kivy.clock import Clock
@@ -32,9 +29,9 @@ voices =engine.getProperty('voices')
 engine.setProperty('voice',voices[-1].id)
 
 class FirstWindow(Screen,Widget):
-    def scr(self,screen):
-        self.ids.f.current=screen
-        self.ids.f.trigger_action(0.2)
+    # def scr(self,screen):
+    #     self.ids.f.current=screen
+    #     self.ids.f.trigger_action(0.2)
     def textt(self,call):
         self.leb.text=str(call)
         self.ids.mic1.source='mic2.png'
@@ -73,7 +70,6 @@ class FirstWindow(Screen,Widget):
             query=k.recognize_google(audio, language='eng-in')    
             print("user said: ",{query},"\n")
         except Exception as e:
-            print("Say that again please....")
             self.speak("Say that again please....")
             return "None"
         self.ids.mic1.source='mic1.png'
@@ -90,6 +86,7 @@ class FirstWindow(Screen,Widget):
 
             
     def exe(self,query):
+     while True:
         if 'wikipedia' in query:
                     try:
                         self.speak('searching Wikipedia....')
@@ -100,26 +97,17 @@ class FirstWindow(Screen,Widget):
                     except Exception as e:
                         print(e)
                         self.speak("sorry boss ,i am not able get any appropriate result from wikipedia")
-        #=======================================================================================
-        #  Queries for screen manager
-        
+        elif 'time' in query:
+                    strtime= datetime.datetime.now().strftime("%H:%M:%S")
+                    self.speak(f"The time is {strtime}")
         elif 'next' in query:
             self.ids.f.trigger_action(0.2)
             # self.scr("third")
         elif 'third' in query:
             self.ids.t.trigger_action(0.2)
+        elif 'fourth' in query:
+            self.ids.t.trigger_action(0.2)    
             # self.scr('third')
-        elif 'forth' or 'calculator' in query:
-            self.ids.fo.trigger_action(0.2)
-        elif 'fifth' in query:
-            self.ids.fi.trigger_action(0.2)
-        elif 'sixth' in query:
-            self.ids.s.trigger_action(0.2)
-        #=======================================================================================
-        
-        elif 'time' in query:
-                    strtime= datetime.datetime.now().strftime("%H:%M:%S")
-                    self.speak(f"The time is {strtime}")
         elif 'youtube' in query:
                     self.speak('starting')
                     time.sleep(3)
@@ -142,50 +130,24 @@ quit : to terminate program
 
             quit()
         else:
-            self.speak("please give appropriate query")
+                self.speak("please give appropriate query")
 
     def anim(self,widget,*args):
         animate=Animation(background_color=(0,0,0,0),d=1)
         animate.start(widget)
         
 
-# =========================================================================
-#  Function for Clock
+
     def update(self,*args):
         self.ti.text= datetime.datetime.now().strftime("[b]%H:%M[/b]:%S")
     def __init__(self, **kwargs):
         super(FirstWindow,self).__init__(**kwargs)
         Clock.schedule_interval(self.update,1)
-#============================================================================
 
 class SecondWindow(Screen):
 	pass
 
 class ThirdWindow(Screen):
-    pass
-
-class ForthWindow(Screen):
-    # pass
-    Config.set('graphics', 'resizable', 1)
-    def calculate(self, calculation):
-            if calculation:
-                try:
-                    self.display.text = str(eval(calculation))
-                except Exception:
-                    self.display.text = "Error"
-    def delete(self, dele):
-            if dele:
-                try:
-                    self.display.text = str(dele[:-1])
-                except Exception:
-                    self.display.text = "Error"
-    def exit(self):
-            quit()
-
-class FifthWindow(Screen):
-    pass
-
-class SixthWindow(Screen):
     pass
 
 kv = Builder.load_file('app.kv')
