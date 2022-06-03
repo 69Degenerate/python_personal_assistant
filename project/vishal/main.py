@@ -29,9 +29,11 @@ class WindowManager(ScreenManager):
 
 engine =pyttsx3.init()
 voices =engine.getProperty('voices')
-engine.setProperty('voice',voices[-1].id)
+# print(voices)
+engine.setProperty('voice',voices[21].id)
 
 class FirstWindow(Screen,Widget):
+  
     def scr(self,screen):
         self.ids.f.current=screen
         self.ids.f.trigger_action(0.2)
@@ -87,9 +89,11 @@ class FirstWindow(Screen,Widget):
         server.login('amolbrand00@gmail.com','amol@1234#')
         server.sendmail('amolbrand00@gmail.com',to,content)
         server.close()
-
-            
+    # def __init__(self, **kwargs):
+    #     super(FirstWindow,self).__init__(**kwargs)
+        
     def exe(self,query):
+        # self.wishme()
         if 'wikipedia' in query:
                     try:
                         self.speak('searching Wikipedia....')
@@ -109,7 +113,7 @@ class FirstWindow(Screen,Widget):
         elif 'third' in query:
             self.ids.t.trigger_action(0.2)
             # self.scr('third')
-        elif 'forth' or 'calculator' in query:
+        elif 'forth' in query:
             self.ids.fo.trigger_action(0.2)
         elif 'fifth' in query:
             self.ids.fi.trigger_action(0.2)
@@ -155,6 +159,7 @@ quit : to terminate program
         self.ti.text= datetime.datetime.now().strftime("[b]%H:%M[/b]:%S")
     def __init__(self, **kwargs):
         super(FirstWindow,self).__init__(**kwargs)
+        # self.wishme()
         Clock.schedule_interval(self.update,1)
 #============================================================================
 
@@ -194,4 +199,21 @@ class app(App):
 		return kv
 
 if __name__ == '__main__':
+    def speak(audio):
+        # self.leb.text=self.leb.text+"\n \n"+str(audio)
+        print(audio)
+        engine.say(audio)
+        engine.runAndWait()
+
+    def wishme():
+        hour = int(datetime.datetime.now().hour)
+        speak("hello sir ")    
+        if hour>=0 and hour<12:
+            speak("Good Morning!")
+        elif hour>=12 and hour<18:
+            speak("Good Afternoon!")
+        else:
+            speak("Good Evining!")         
+        speak("i am friday, how may i help you?")    
+    wishme()
     app().run()
