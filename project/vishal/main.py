@@ -104,12 +104,18 @@ class FirstWindow(Screen,Widget):
                     except Exception as e:
                         print(e)
                         self.speak("sorry boss ,i am not able get any appropriate result from wikipedia")
+        elif 'search' in query:
+                    try:
+                        query= query.replace("search","")
+                        webbrowser.open('https://www.google.com/search?client=firefox-b-lm&q='+query)
+                    except Exception as e:
+                        print(e)
+                        self.speak("sorry boss ,i am not able get any appropriate result from wikipedia")
         #=======================================================================================
         #  Queries for screen manager
         
         elif 'next' in query:
             self.ids.f.trigger_action(0.2)
-            # self.scr("third")
         elif 'third' in query:
             self.ids.t.trigger_action(0.2)
             # self.scr('third')
