@@ -22,6 +22,7 @@ from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
+import cv2
 
 
 class WindowManager(ScreenManager):
@@ -30,7 +31,7 @@ class WindowManager(ScreenManager):
 engine =pyttsx3.init()
 voices =engine.getProperty('voices')
 # print(voices)
-engine.setProperty('voice',voices[21].id)
+engine.setProperty('voice',voices[1].id)
 
 class FirstWindow(Screen,Widget):
   
@@ -79,7 +80,8 @@ class FirstWindow(Screen,Widget):
             self.speak("Say that again please....")
             return "None"
         self.ids.mic1.source='mic1.png'
-        return query
+        self.exe(query)
+
 
 
     def sendEmail(to,content):
@@ -110,7 +112,7 @@ class FirstWindow(Screen,Widget):
                         webbrowser.open('https://www.google.com/search?client=firefox-b-lm&q='+query)
                     except Exception as e:
                         print(e)
-                        self.speak("sorry boss ,i am not able get any appropriate result from wikipedia")
+                        self.speak("Sorry i am not able to search")
         #=======================================================================================
         #  Queries for screen manager
         
@@ -126,6 +128,38 @@ class FirstWindow(Screen,Widget):
         elif 'sixth' in query:
             self.ids.s.trigger_action(0.2)
         #=======================================================================================
+        elif 'file' in query:
+            open='C:\\'
+            os.startfile(open)
+
+        elif 'chrome' in query:
+            open='"C:\\Users\\Public\\Desktop\\Google Chrome.lnk"'
+            os.startfile(open)    
+
+        elif 'firefox' in query:
+            open='C:\\Program Files\\Mozilla Firefox\\firefox.exe'
+            os.startfile(open)    
+        elif 'code' in query:
+            open='C:\\Users\\Amol\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe'
+            os.startfile(open)            
+
+        elif 'camera' in query:
+            cap = cv2.VideoCapture(0)
+            while(cap.isOpened()):
+                
+                while True:
+                    
+                    ret, img = cap.read()
+                    cv2.imshow('img', img)
+                    if cv2.waitKey(30) & 0xff == ord('q'):
+                        break
+                        
+                cap.release()
+                cv2.destroyAllWindows()
+            else:
+                print("Alert ! Camera disconnected")
+
+
         
         elif 'time' in query:
                     strtime= datetime.datetime.now().strftime("%H:%M:%S")
