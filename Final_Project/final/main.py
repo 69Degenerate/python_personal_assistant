@@ -74,7 +74,7 @@ class FirstWindow(Screen,Widget):
         try:
             self.speak("Recognizing......")
             query=k.recognize_google(audio, language='eng-in')    
-            print("user said: ",{query},"\n")
+            print(f"user said: ",{query},"\n")
         except Exception as e:
             print("Say that again please....")
             self.speak("Say that again please....")
@@ -116,7 +116,7 @@ class FirstWindow(Screen,Widget):
         #=======================================================================================
         #  Queries for screen manager
         
-        elif 'next' in query:
+        elif 'calculator' in query:
             self.ids.f.trigger_action(0.2)
         elif 'third' in query:
             self.ids.t.trigger_action(0.2)
@@ -176,6 +176,32 @@ class FirstWindow(Screen,Widget):
         elif 'panel' in query:
             open="C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Google Chrome.lnk"
             os.startfile(open)                    
+
+        elif 'movies' in query:
+            dir='C:\\Users\\Amol\\Desktop\\movies'
+            list=os.listdir(dir)
+            print(list)
+            if 'acharya' in query:
+                os.startfile(os.path.join(dir,list[0]))
+
+            elif 'puramulo' in query:
+                os.startfile(os.path.join(dir,list[1]))    
+
+            elif 'raw' in query:
+                os.startfile(os.path.join(dir,list[2]))    
+
+            elif 'bhool bhulaiyaa' in query:
+                os.startfile(os.path.join(dir,list[3])) 
+
+            elif 'strange' in query:
+                os.startfile(os.path.join(dir,list[4]))    
+
+            elif 'sher' in query:
+                os.startfile(os.path.join(dir,list[6]))
+                    
+            elif 'jalpari' in query:
+                os.startfile(os.path.join(dir,list[7]))    
+
         elif 'help' in query:
                 self.speak('here are some query you can use')
                 h='''
