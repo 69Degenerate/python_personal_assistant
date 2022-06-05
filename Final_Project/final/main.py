@@ -2,12 +2,12 @@ import time
 import pyttsx3
 import speech_recognition as sr
 import datetime
-# import pyaudio
+import pyaudio
 import wikipedia
 import webbrowser
 import os
 import smtplib
-# import googletrans
+import googletrans
 from kivy.config import Config
 from kivy.app import App as a
 from kivy.uix.button import Button as b
@@ -30,7 +30,6 @@ class WindowManager(ScreenManager):
 
 engine =pyttsx3.init()
 voices =engine.getProperty('voices')
-# print(voices)
 engine.setProperty('voice',voices[1].id)
 
 class FirstWindow(Screen,Widget):
@@ -93,7 +92,6 @@ class FirstWindow(Screen,Widget):
         server.close()
         
     def exe(self,query):
-        # self.wishme()
         if 'wikipedia' in query:
                     try:
                         self.speak('searching Wikipedia....')
@@ -118,7 +116,6 @@ class FirstWindow(Screen,Widget):
             self.ids.f.trigger_action(0.2)
         elif 'third' in query:
             self.ids.t.trigger_action(0.2)
-            # self.scr('third')
         elif 'forth' in query:
             self.ids.fo.trigger_action(0.2)
         elif 'fifth' in query:
@@ -223,9 +220,9 @@ quit : to terminate program
         else:
             self.speak("please give appropriate query")
 
-    def anim(self,widget,*args):
-        animate=Animation(background_color=(0,0,0,0),d=1)
-        animate.start(widget)
+    # def anim(self,widget,*args):
+    #     animate=Animation(background_color=(0,0,0,0),d=1)
+    #     animate.start(widget)
         
 
 # =========================================================================
@@ -234,7 +231,6 @@ quit : to terminate program
         self.ti.text= datetime.datetime.now().strftime("[b]%H:%M[/b]:%S")
     def __init__(self, **kwargs):
         super(FirstWindow,self).__init__(**kwargs)
-        # self.wishme()
         Clock.schedule_interval(self.update,1)
 #============================================================================
 
@@ -245,7 +241,6 @@ class ThirdWindow(Screen):
     pass
 
 class ForthWindow(Screen):
-    # pass
     Config.set('graphics', 'resizable', 1)
     def calculate(self, calculation):
             if calculation:
@@ -273,14 +268,14 @@ class app(App):
 	def build(self):
 		return kv
 
-if __name__ == '__main__':
-    def speak(audio):
-        # self.leb.text=self.leb.text+"\n \n"+str(audio)
+# if __name__ == '__main__':
+    
+def speak(audio):
         print(audio)
         engine.say(audio)
         engine.runAndWait()
 
-    def wishme():
+def wishme():
         hour = int(datetime.datetime.now().hour)
         speak("hello sir ")    
         if hour>=0 and hour<12:
@@ -290,5 +285,5 @@ if __name__ == '__main__':
         else:
             speak("Good Evining!")         
         speak("i am friday, how may i help you?")    
-    wishme()
-    app().run()
+wishme()
+app().run()
