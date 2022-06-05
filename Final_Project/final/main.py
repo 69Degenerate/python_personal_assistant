@@ -159,7 +159,8 @@ class FirstWindow(Screen,Widget):
             else:
                 print("Alert ! Camera disconnected")
 
-
+        elif 'ISS' in query:
+            os.startfile('iss.py')
         
         elif 'time' in query:
                     strtime= datetime.datetime.now().strftime("%H:%M:%S")
@@ -168,6 +169,13 @@ class FirstWindow(Screen,Widget):
                     self.speak('starting')
                     time.sleep(3)
                     webbrowser.open('https://youtu.be/iik25wqIuFo')
+        elif 'VLC' in query:
+            open="C:\\Users\\Public\\Desktop\\VLC media player.lnk"
+            os.startfile(open)
+
+        elif 'panel' in query:
+            open="C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Google Chrome.lnk"
+            os.startfile(open)                    
         elif 'help' in query:
                 self.speak('here are some query you can use')
                 h='''
