@@ -49,9 +49,9 @@ class FirstWindow(Screen,Widget):
             else:
                 self.speak("Good Evining!")         
             self.speak("i am friday, how may i help you?")
-    def __init__(self, **kwargs):
-        super(FirstWindow,self).__init__(**kwargs)
-        self.wishme()
+    # def __init__(self, **kwargs):
+    #     super(FirstWindow,self).__init__(**kwargs)
+    #     self.wishme()
 	# pass
 
 class SecondWindow(Screen,Widget):
