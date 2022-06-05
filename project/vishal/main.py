@@ -23,7 +23,7 @@ from kivy.uix.widget import Widget
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 import cv2
-
+import threading
 
 class WindowManager(ScreenManager):
 	pass
@@ -33,6 +33,28 @@ voices =engine.getProperty('voices')
 engine.setProperty('voice',voices[1].id)
 
 class FirstWindow(Screen,Widget):
+    def speak(self,audio):
+            self.ids.greet.text=self.ids.greet.text+"\n \n"+str(audio)
+            print(audio)
+            engine.say(audio)
+            engine.runAndWait()
+
+    def wishme(self,*args):
+            hour = int(datetime.datetime.now().hour)
+            self.speak("hello sir ")    
+            if hour>=0 and hour<12:
+                self.speak("Good Morning!")
+            elif hour>=12 and hour<18:
+                self.speak("Good Afternoon!")
+            else:
+                self.speak("Good Evining!")         
+            self.speak("i am friday, how may i help you?")
+    def __init__(self, **kwargs):
+        super(FirstWindow,self).__init__(**kwargs)
+        self.wishme()
+	# pass
+
+class SecondWindow(Screen,Widget):
   
     def scr(self,screen):
         self.ids.f.current=screen
@@ -112,7 +134,7 @@ class FirstWindow(Screen,Widget):
         #=======================================================================================
         #  Queries for screen manager
         
-        elif 'calculator' in query:
+        elif 'prew' in query:
             self.ids.f.trigger_action(0.2)
         elif 'third' in query:
             self.ids.t.trigger_action(0.2)
@@ -230,12 +252,10 @@ quit : to terminate program
     def update(self,*args):
         self.ti.text= datetime.datetime.now().strftime("[b]%H:%M[/b]:%S")
     def __init__(self, **kwargs):
-        super(FirstWindow,self).__init__(**kwargs)
+        super(SecondWindow,self).__init__(**kwargs)
         Clock.schedule_interval(self.update,1)
 #============================================================================
 
-class SecondWindow(Screen):
-	pass
 
 class ThirdWindow(Screen):
     pass
@@ -268,22 +288,23 @@ class app(App):
 	def build(self):
 		return kv
 
-# if __name__ == '__main__':
+if __name__ == '__main__':
     
-def speak(audio):
-        print(audio)
-        engine.say(audio)
-        engine.runAndWait()
+# def speak(audio):
+#         print(audio)
+#         engine.say(audio)
+#         engine.runAndWait()
 
-def wishme():
-        hour = int(datetime.datetime.now().hour)
-        speak("hello sir ")    
-        if hour>=0 and hour<12:
-            speak("Good Morning!")
-        elif hour>=12 and hour<18:
-            speak("Good Afternoon!")
-        else:
-            speak("Good Evining!")         
-        speak("i am friday, how may i help you?")    
-wishme()
-app().run()
+# def wishme():
+#         hour = int(datetime.datetime.now().hour)
+#         speak("hello sir ")    
+#         if hour>=0 and hour<12:
+#             speak("Good Morning!")
+#         elif hour>=12 and hour<18:
+#             speak("Good Afternoon!")
+#         else:
+#             speak("Good Evining!")         
+#         speak("i am friday, how may i help you?")    
+# wishme()
+    # FirstWindow.wishme()
+    app().run()

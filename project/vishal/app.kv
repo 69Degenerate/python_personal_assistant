@@ -5,9 +5,26 @@ WindowManager:
     ForthWindow:
     FifthWindow:
     SixthWindow:
-
 <FirstWindow>
     name:"first"
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+        Label:#text lebel
+            id:greet
+            text:''
+            # text_size:self.size
+            # pos_hint:{'x':.4,'y':.1}
+            # size_hint:None,None
+            # size:root.width*.35,root.height*.3
+        Button:
+            text: "second button"
+            font_size: 32
+            on_release: 
+                app.root.current = "second"
+                root.manager.transition.direction = "left"
+<SecondWindow>:
+    name: "second"
     id:g
     display:dis
     leb:l
@@ -16,7 +33,6 @@ WindowManager:
     FloatLayout:
         pos:0,0
         size:root.width,root.height
-        
     #==================================================================
         # Buttons for screen manager 
         Button:# button to goto second screen
@@ -24,7 +40,7 @@ WindowManager:
             size_hint:None,None
             size:root.width*.00001,root.height*.00001
             on_press:
-                app.root.current = "second"
+                app.root.current = "first"
                 root.manager.transition.direction = "left"
         Button:# button to goto third screen
             id:t
@@ -129,17 +145,6 @@ WindowManager:
                 size:root.width*.04,root.height*.04
                 allow_stretch:False
                 keep_ratio:False
-<SecondWindow>:
-    name: "second"
-    BoxLayout:
-        orientation: "vertical"
-        size: root.width, root.height
-        Button:
-            text: "second button"
-            font_size: 32
-            on_release: 
-                app.root.current = "first"
-                root.manager.transition.direction = "left"
 
 <ThirdWindow>:
     name:"third"
