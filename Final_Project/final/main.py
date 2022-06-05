@@ -91,8 +91,6 @@ class FirstWindow(Screen,Widget):
         server.login('amolbrand00@gmail.com','amol@1234#')
         server.sendmail('amolbrand00@gmail.com',to,content)
         server.close()
-    # def __init__(self, **kwargs):
-    #     super(FirstWindow,self).__init__(**kwargs)
         
     def exe(self,query):
         # self.wishme()
@@ -128,6 +126,9 @@ class FirstWindow(Screen,Widget):
         elif 'sixth' in query:
             self.ids.s.trigger_action(0.2)
         #=======================================================================================
+        
+        #=======================================================================================
+        #  os or file manupulation commands
         elif 'file' in query:
             open='C:\\'
             os.startfile(open)
@@ -201,7 +202,7 @@ class FirstWindow(Screen,Widget):
                     
             elif 'jalpari' in query:
                 os.startfile(os.path.join(dir,list[7]))    
-
+        #=======================================================================================
         elif 'help' in query:
                 self.speak('here are some query you can use')
                 h='''
