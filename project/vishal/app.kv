@@ -1,0 +1,269 @@
+WindowManager:
+	FirstWindow:
+	SecondWindow:
+    ThirdWindow:
+    ForthWindow:
+    FifthWindow:
+    SixthWindow:
+
+<FirstWindow>
+    name:"first"
+    id:g
+    display:dis
+    leb:l
+    # leb2:l2
+    ti:clock
+    FloatLayout:
+        pos:0,0
+        size:root.width,root.height
+        
+    #==================================================================
+        # Buttons for screen manager 
+        Button:# button to goto second screen
+            id:f
+            size_hint:None,None
+            size:root.width*.00001,root.height*.00001
+            on_press:
+                app.root.current = "second"
+                root.manager.transition.direction = "left"
+        Button:# button to goto third screen
+            id:t
+            size_hint:None,None
+            size:root.width*.00001,root.height*.00001
+            on_press:
+                app.root.current = "third"
+                root.manager.transition.direction = "left"
+        Button:# button to goto forth screen
+            id:fo
+            size_hint:None,None
+            size:root.width*.00001,root.height*.00001
+            on_press:
+                app.root.current = "forth"
+                root.manager.transition.direction = "left"
+        Button:# button to goto fifth screen
+            id:fi
+            size_hint:None,None
+            size:root.width*.00001,root.height*.00001
+            on_press:
+                app.root.current = "fifth"
+                root.manager.transition.direction = "left"
+        Button:# button to goto sixth screen
+            id:s
+            size_hint:None,None
+            size:root.width*.00001,root.height*.00001
+            on_press:
+                app.root.current = "sixth"
+                root.manager.transition.direction = "left"
+    #=================================================================
+
+        Image:
+            source:'4.jpg'
+            allow_stretch:True
+            keep_ratio:False
+        Button:#help button
+            text:'help'
+            font_size:12
+            pos_hint:{'x':.01,'y':.9}
+            size_hint:None,None
+            size:root.width*.07,root.height*.05
+            on_press:g.exe('help')
+        Label:#text lebel
+            id:l
+            text:''
+            text_size:self.size
+            pos_hint:{'x':.4,'y':.1}
+            size_hint:None,None
+            size:root.width*.35,root.height*.3
+
+        Label:#clock
+            id:clock 
+            text:''
+            markup:True
+            font_size:20
+            # pos_hint:{'x':.4,'y':.9
+            pos_hint:{'center_x':0.5,'center_y':.97}
+            size_hint:None,None
+            size:root.width*.15,root.height*.07
+        Button:#EXIT button 
+            background_color:(0,0,0,0)
+            pos_hint:{'x':.9,'y':.9}
+            size_hint:None,None
+            size:root.width*.07,root.height*.07
+            on_press:g.exe('quit')
+            Image:
+                source:'1.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size:root.width*.07,root.height*.07
+        TextInput:#text box
+            id:dis
+            text:''
+            font_size:20
+            hint_text:'enter queries here'
+            text_size:self.size
+            pos_hint:{'x':.0,'y':.0}
+            size_hint:None,None
+            size:root.width*.9,root.height*.06002
+            background_color:'white'
+
+        Button:#query button
+            text: 'Enter'
+            # on_press:g.exe(dis.text)
+            on_release:g.exe(dis.text)
+            pos_hint:{'x':.9,'y':.0}
+            size_hint:None,None
+            size:root.width*.1,root.height*.06
+            
+        Button:#speak button
+            background_color:(0,0,0,0)
+            on_press:g.off()
+            on_release:g.listen()
+            pos_hint:{'x':.85,'y':.0001}
+            size_hint:None,None
+            size:root.width*.05,root.height*.06
+            Image:
+                id:mic1
+                source:'mic1.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size:root.width*.04,root.height*.04
+                allow_stretch:False
+                keep_ratio:False
+<SecondWindow>:
+    name: "second"
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+        Button:
+            text: "second button"
+            font_size: 32
+            on_release: 
+                app.root.current = "first"
+                root.manager.transition.direction = "left"
+
+<ThirdWindow>:
+    name:"third"
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+        Button:
+            text:"third button"
+            font_size: 32
+            on_release: 
+                app.root.current = "first"
+                root.manager.transition.direction = "left"
+
+<ForthWindow>:
+    name:'forth'
+    id: calculator
+    display: entry
+    GridLayout:
+        column:4
+        rows: 6
+        padding: 10
+        spacing: 10
+    
+        BoxLayout:
+            TextInput:
+                id: entry
+                font_size: 32
+                multiline: False
+        BoxLayout:
+            spacing: 10
+            Button:
+                text: "7"
+                on_press: entry.text += self.text
+            Button:
+                text: "8"
+                on_press: entry.text += self.text
+            Button:
+                text: "9"
+                on_press: entry.text += self.text
+            Button:
+                text: "+"
+                on_press: entry.text += self.text
+        BoxLayout:
+            spacing: 10
+            Button:
+                text: "4"
+                on_press: entry.text += self.text
+            Button:
+                text: "5"
+                on_press: entry.text += self.text
+            Button:
+                text: "6"
+                on_press: entry.text += self.text
+            Button:
+                text: "-"
+                on_press: entry.text += self.text
+        BoxLayout:
+            spacing: 10
+            Button:
+                text: "1"
+                on_press: entry.text += self.text
+            Button:
+                text: "2"
+                on_press: entry.text += self.text
+            Button:
+                text: "3"
+                on_press: entry.text += self.text
+            Button:
+                text: "*"
+                on_press: entry.text += self.text
+        BoxLayout:
+            spacing: 10
+            Button:
+                text: "AC"
+                on_press: entry.text = ""
+            Button:
+                text: "0"
+                on_press: entry.text += self.text
+            Button:
+                text: "DEL"
+                on_press: calculator.delete(entry.text)
+            Button:
+                text: "/"
+                on_press: entry.text += self.text
+        BoxLayout:
+            spacing:10
+            Button:
+                font_size: 25
+                text: "="
+                on_press: calculator.calculate(entry.text)
+            Button:
+                text:"EXIT"
+                on_press: calculator.exit()
+            Button:
+                text:"BACK"
+                # on_press: calculator.exit()
+                on_release: 
+                    app.root.current = "first"
+                    root.manager.transition.direction = "left"
+            Button:
+                text:""
+                # on_press: calculator.exit()
+                # on_release: 
+                #     app.root.current = "first"
+                #     root.manager.transition.direction = "left"
+<FifthWindow>:
+    name:'fifth'
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+        Button:
+            text:"fifth button"
+            font_size: 32
+            on_release: 
+                app.root.current = "first"
+                root.manager.transition.direction = "left"
+<SixthWindow>:
+    name:'sixth'
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+        Button:
+            text:"sixth button"
+            font_size: 32
+            on_release: 
+                app.root.current = "first"
+                root.manager.transition.direction = "left"
