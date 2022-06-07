@@ -6,7 +6,7 @@ import time
 screen=turtle.Screen()
 screen.setup(720,360)
 screen.setworldcoordinates(-180,-90,180,90)
-screen.bgpic("world.png")
+screen.bgpic("C:\Users\Amol\Desktop\project\project\vishal\world.png")
 screen.register_shape("iss.gif")
 
 iss=turtle.Turtle()
