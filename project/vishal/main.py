@@ -25,7 +25,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 import cv2
 import threading
 
-class WindowManager(ScreenManager):
+class WindowManager(ScreenManager,BoxLayout):
 	pass
 
 engine =pyttsx3.init()
@@ -49,9 +49,10 @@ class FirstWindow(Screen,Widget):
             else:
                 self.speak("Good Evining!")         
             self.speak("i am friday, how may i help you?")
-    # def __init__(self, **kwargs):
-    #     super(FirstWindow,self).__init__(**kwargs)
-    #     self.wishme()
+    def __init__(self, **kwargs):
+        super(FirstWindow,self).__init__(**kwargs)
+        # self.wishme()
+        # Clock.schedule_interval(self.wishme)
 	# pass
 
 class SecondWindow(Screen,Widget):
@@ -288,23 +289,22 @@ class app(App):
 	def build(self):
 		return kv
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
     
 # def speak(audio):
 #         print(audio)
 #         engine.say(audio)
 #         engine.runAndWait()
-
 # def wishme():
 #         hour = int(datetime.datetime.now().hour)
-#         speak("hello sir ")    
+#         FirstWindow.speak("hello sir ")    
 #         if hour>=0 and hour<12:
-#             speak("Good Morning!")
+#             FirstWindow.speak("Good Morning!")
 #         elif hour>=12 and hour<18:
-#             speak("Good Afternoon!")
+#             FirstWindow.speak("Good Afternoon!")
 #         else:
-#             speak("Good Evining!")         
-#         speak("i am friday, how may i help you?")    
+#             FirstWindow.speak("Good Evining!")         
+#         FirstWindow.speak("i am friday, how may i help you?")    
 # wishme()
-    # FirstWindow.wishme()
-    app().run()
+# FirstWindow.wishme()
+app().run()

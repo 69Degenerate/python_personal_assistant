@@ -2,7 +2,7 @@ import time
 import pyttsx3
 import speech_recognition as sr
 import datetime
-# import pyaudio
+import pyaudio
 import wikipedia
 import webbrowser
 import os
@@ -112,11 +112,11 @@ class FirstWindow(Screen,Widget):
         #=======================================================================================
         #  Queries for screen manager
         
-        elif 'calculator' in query:
+        elif 'next' in query:
             self.ids.f.trigger_action(0.2)
         elif 'third' in query:
             self.ids.t.trigger_action(0.2)
-        elif 'forth' in query:
+        elif 'calculator' in query:
             self.ids.fo.trigger_action(0.2)
         elif 'fifth' in query:
             self.ids.fi.trigger_action(0.2)

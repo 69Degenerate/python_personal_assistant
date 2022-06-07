@@ -7,19 +7,21 @@ WindowManager:
     SixthWindow:
 <FirstWindow>
     name:"first"
-    BoxLayout:
-        orientation: "vertical"
-        size: root.width, root.height
+    # l:greet
+    FloatLayout:
+        pos:0,0
+        size:root.width,root.height
         Label:#text lebel
             id:greet
-            text:''
+            text:"dasfdfsweq"
             # text_size:self.size
             # pos_hint:{'x':.4,'y':.1}
             # size_hint:None,None
             # size:root.width*.35,root.height*.3
         Button:
-            text: "second button"
+            text:""
             font_size: 32
+            background_color:(0,0,0,0)
             on_release: 
                 app.root.current = "second"
                 root.manager.transition.direction = "left"
