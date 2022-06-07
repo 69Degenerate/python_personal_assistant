@@ -9,19 +9,36 @@ WindowManager:
     name:"first"
     # l:greet
     FloatLayout:
+        id:fp
         pos:0,0
         size:root.width,root.height
         Label:#text lebel
             id:greet
-            text:"dasfdfsweq"
+            text:'Hello sir I, am Friday \nHow  may I help you\n'
             # text_size:self.size
             # pos_hint:{'x':.4,'y':.1}
             # size_hint:None,None
             # size:root.width*.35,root.height*.3
+        Label:
+            text:"(click to contiue)"
+        Label:
+            id:con
+            text:""
+            pos_hint:{'x':.5,'y':.2}
+        Button:
+            id:co
+            text:"df"
+            on_press:root.c()
+            font_size:12
+            pos_hint:{'x':.01,'y':.9}
+            size_hint:None,None
+            size:root.width*.07,root.height*.05
         Button:
             text:""
-            font_size: 32
-            background_color:(0,0,0,0)
+            font_size:12
+            pos_hint:{'x':.5,'y':.9}
+            size_hint:None,None
+            size:root.width*.07,root.height*.05
             on_release: 
                 app.root.current = "second"
                 root.manager.transition.direction = "left"
