@@ -16,7 +16,7 @@ from kivy.uix.button import Button as b
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.widget import Widget
-from kivymd.uix.label import MDLabel
+# from kivymd.uix.label import MDLabel
 from kivy.uix.textinput import TextInput
 from kivy.clock import Clock
 from kivy.core.image import Image
@@ -26,23 +26,7 @@ from kivy.uix.widget import Widget
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 import cv2
-# from datetime import datetime
 import time, os, requests
-
-url = 'https://www.google.com/'
-timeout = 2
-sleep_time = 10
-op = None
-# now = datetime.now()
-try:
-        op = requests.get(url, timeout=timeout).status_code
-        if op == 200:
-            p="Connected"
-        else:
-            print("Status Code is not 200")
-            print("status Code", op)
-except:
-        p="Not Connected"
 class WindowManager(ScreenManager,BoxLayout):
 	pass
 
@@ -50,42 +34,33 @@ engine =pyttsx3.init()
 voices =engine.getProperty('voices')
 engine.setProperty('voice',voices[1].id)
 
-class FirstWindow(Screen,Widget):
-    def build(self):
-        screen=Screen()
-        if p=="Connected":
-            self.ids.con.text="connected to internet"
-        elif p=="Not Connected":
-            self.ids.con.text="not connected to internet"
-    # if p=="Connected":
-    #         .con.text="connected to internet"
-    # elif p=="Not Connected":
-    #         ids.con.text="not connected to internet"
+class FirstWindow(Screen):
+    
+    url = 'https://www.google.com/'
+    timeout = 2
+    sleep_time = 10
+    op = None
+    try:
+            op = requests.get(url, timeout=timeout).status_code
+            if op == 200:
+                p="Connected"
+            else:
+                print("Status Code is not 200")
+                print("status Code", op)
+    except:
+            p="Not Connected"    
+    a="connected to internet"
+    z="not connected to internet"
+    def c(self):
+        if self.p=="Connected":
+            self.ids.co.text="connected to internet"
+        elif self.p=="Not Connected":
+            self.ids.co.text="not connected to internet"
+    def on_enter(self):
+        Clock.schedule_once(self.c)
 
-    # def speak(self,audio):
-    #         self.ids.greet.text=self.ids.greet.text+"\n \n"+str(audio)
-    #         print(audio)
-    #         engine.say(audio)
-    #         engine.runAndWait()
-
-    # def wishme(self,*args):
-    #         hour = int(datetime.datetime.now().hour)
-    #         self.speak("hello sir ")    
-    #         if hour>=0 and hour<12:
-    #             self.speak("Good Morning!")
-    #         elif hour>=12 and hour<18:
-    #             self.speak("Good Afternoon!")
-    #         else:
-    #             self.speak("Good Evining!")         
-    #         self.speak("i am friday, how may i help you?")
-    # def __init__(self, **kwargs):
-    #     super(FirstWindow,self).__init__(**kwargs)
-    #     # self.wishme()
-    #     Clock.schedule_interval(self.wishme,2)
-	# pass
 
 class SecondWindow(Screen,Widget):
-  
     def scr(self,screen):
         self.ids.f.current=screen
         self.ids.f.trigger_action(0.2)

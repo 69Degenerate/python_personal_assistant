@@ -7,6 +7,8 @@ WindowManager:
     SixthWindow:
 <FirstWindow>
     name:"first"
+    id:f
+    
     # l:greet
     FloatLayout:
         id:fp
@@ -21,10 +23,11 @@ WindowManager:
             # size:root.width*.35,root.height*.3
         Label:
             text:"(click to contiue)"
+            pos_hint:{'x':.3,'y':.26}
         Label:
             id:con
             text:""
-            pos_hint:{'x':.5,'y':.2}
+            pos_hint:{'x':.3,'y':.6}
         Button:
             id:co
             text:"df"
