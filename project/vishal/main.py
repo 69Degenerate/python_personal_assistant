@@ -34,30 +34,34 @@ engine =pyttsx3.init()
 voices =engine.getProperty('voices')
 engine.setProperty('voice',voices[1].id)
 
-class FirstWindow(Screen):
     
-    url = 'https://www.google.com/'
-    timeout = 2
-    sleep_time = 10
-    op = None
-    try:
+url = 'https://www.google.com/'
+timeout = 2
+sleep_time = 10
+op = None
+try:
             op = requests.get(url, timeout=timeout).status_code
             if op == 200:
                 p="Connected"
             else:
                 print("Status Code is not 200")
                 print("status Code", op)
-    except:
-            p="Not Connected"    
-    a="connected to internet"
-    z="not connected to internet"
-    def c(self):
-        if self.p=="Connected":
+except:
+            p="Not Connected"   
+class FirstWindow(Screen):
+ 
+    def c(self,*args):
+        if p=="Connected":
             self.ids.co.text="connected to internet"
-        elif self.p=="Not Connected":
+            self.ids.co.color=(0,1,0,1)
+        elif p=="Not Connected":
             self.ids.co.text="not connected to internet"
+            self.ids.massage.text=self.ids.massage.text+"\nfuncionality will be limited without internet connnection"
     def on_enter(self):
         Clock.schedule_once(self.c)
+    # def __init__(self, **kwargs):
+    #     super(FirstWindow,self).__init__(**kwargs)
+    #     Clock.schedule_once(self.c)
 
 
 class SecondWindow(Screen,Widget):
@@ -309,20 +313,20 @@ class app(App):
 
 # if __name__ == '__main__':
     
-# def speak(audio):
-#         print(audio)
-#         engine.say(audio)
-#         engine.runAndWait()
-# def wishme():
-#         hour = int(datetime.datetime.now().hour)
-#         FirstWindow.speak("hello sir ")    
-#         if hour>=0 and hour<12:
-#             FirstWindow.speak("Good Morning!")
-#         elif hour>=12 and hour<18:
-#             FirstWindow.speak("Good Afternoon!")
-#         else:
-#             FirstWindow.speak("Good Evining!")         
-#         FirstWindow.speak("i am friday, how may i help you?")    
-# wishme()
+def speak(audio):
+        print(audio)
+        engine.say(audio)
+        engine.runAndWait()
+def wishme():
+        hour = int(datetime.datetime.now().hour)
+        speak("hello sir ")    
+        if hour>=0 and hour<12:
+            speak("Good Morning!")
+        elif hour>=12 and hour<18:
+            speak("Good Afternoon!")
+        else:
+            speak("Good Evining!")         
+        speak("i am friday, how may i help you?")    
+wishme()
 # FirstWindow.wishme()
 app().run()
