@@ -106,7 +106,22 @@ class SecondWindow(Screen,Widget):
         self.ids.mic1.source='mic1.png'
         self.exe(query)
 
-
+    def st(self):
+            screen=turtle.Screen()
+            screen.setup(720,360)
+            screen.setworldcoordinates(-180,-90,180,90)
+            screen.bgpic("C:\\Users\\Amol\\Desktop\\project\\project\\vishal\\world.png")
+            screen.register_shape("C:\\Users\\Amol\\Desktop\\project\\project\\vishal\\iss.gif")
+            iss=turtle.Turtle()
+            iss.shape("C:\\Users\\Amol\\Desktop\\project\\project\\vishal\\iss.gif")
+            iss.penup()
+            while True:
+                loc=ISS_Info.iss_current_loc()
+                lat=loc['iss_position']['latitude']
+                lon=loc['iss_position']['longitude']
+                print("Position: \n latitude: {}, longitude: {}".format(lat,lon))
+                iss.goto(float(lon),float(lat))
+                time.sleep(2)
 
     def sendEmail(to,content):
         server=smtplib.SMTP('smtp.gmail.com',587)
@@ -182,28 +197,8 @@ class SecondWindow(Screen,Widget):
             else:
                 print("Alert ! Camera disconnected")
 
-        elif 'iss' in query:
-            # os.startfile('iss.py')
-                        
-                        
-            screen=turtle.Screen()
-            screen.setup(720,360)
-            screen.setworldcoordinates(-180,-90,180,90)
-            screen.bgpic("C:\\Users\\Amol\\Desktop\\project\\project\\vishal\\world.png")
-            screen.register_shape("C:\\Users\\Amol\\Desktop\\project\\project\\vishal\\iss.gif")
-
-            iss=turtle.Turtle()
-            iss.shape("C:\\Users\\Amol\\Desktop\\project\\project\\vishal\\iss.gif")
-            iss.penup()
-
-            while True:
-                loc=ISS_Info.iss_current_loc()
-                lat=loc['iss_position']['latitude']
-                lon=loc['iss_position']['longitude']
-                print("Position: \n latitude: {}, longitude: {}".format(lat,lon))
-                iss.goto(float(lon),float(lat))
-                time.sleep(5)
-                    
+        elif 'iss' in query:           
+            self.st()
         elif 'time' in query:
                     strtime= datetime.datetime.now().strftime("%H:%M:%S")
                     self.speak(f"The time is {strtime}")
