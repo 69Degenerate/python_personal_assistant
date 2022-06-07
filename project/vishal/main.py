@@ -16,6 +16,7 @@ from kivy.uix.button import Button as b
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.widget import Widget
+from kivymd.uix.label import MDLabel
 from kivy.uix.textinput import TextInput
 from kivy.clock import Clock
 from kivy.core.image import Image
@@ -50,33 +51,37 @@ voices =engine.getProperty('voices')
 engine.setProperty('voice',voices[1].id)
 
 class FirstWindow(Screen,Widget):
-    def c(self):
+    def build(self):
+        screen=Screen()
         if p=="Connected":
             self.ids.con.text="connected to internet"
         elif p=="Not Connected":
             self.ids.con.text="not connected to internet"
-    
+    # if p=="Connected":
+    #         .con.text="connected to internet"
+    # elif p=="Not Connected":
+    #         ids.con.text="not connected to internet"
 
-    def speak(self,audio):
-            self.ids.greet.text=self.ids.greet.text+"\n \n"+str(audio)
-            print(audio)
-            engine.say(audio)
-            engine.runAndWait()
+    # def speak(self,audio):
+    #         self.ids.greet.text=self.ids.greet.text+"\n \n"+str(audio)
+    #         print(audio)
+    #         engine.say(audio)
+    #         engine.runAndWait()
 
-    def wishme(self,*args):
-            hour = int(datetime.datetime.now().hour)
-            self.speak("hello sir ")    
-            if hour>=0 and hour<12:
-                self.speak("Good Morning!")
-            elif hour>=12 and hour<18:
-                self.speak("Good Afternoon!")
-            else:
-                self.speak("Good Evining!")         
-            self.speak("i am friday, how may i help you?")
-    def __init__(self, **kwargs):
-        super(FirstWindow,self).__init__(**kwargs)
-        # self.wishme()
-        Clock.schedule_interval(self.wishme,2)
+    # def wishme(self,*args):
+    #         hour = int(datetime.datetime.now().hour)
+    #         self.speak("hello sir ")    
+    #         if hour>=0 and hour<12:
+    #             self.speak("Good Morning!")
+    #         elif hour>=12 and hour<18:
+    #             self.speak("Good Afternoon!")
+    #         else:
+    #             self.speak("Good Evining!")         
+    #         self.speak("i am friday, how may i help you?")
+    # def __init__(self, **kwargs):
+    #     super(FirstWindow,self).__init__(**kwargs)
+    #     # self.wishme()
+    #     Clock.schedule_interval(self.wishme,2)
 	# pass
 
 class SecondWindow(Screen,Widget):
