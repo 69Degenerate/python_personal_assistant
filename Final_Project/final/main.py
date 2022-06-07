@@ -2,7 +2,7 @@ import time
 import pyttsx3
 import speech_recognition as sr
 import datetime
-import pyaudio
+# import pyaudio
 import wikipedia
 import webbrowser
 import os
@@ -30,7 +30,7 @@ class WindowManager(ScreenManager):
 
 engine =pyttsx3.init()
 voices =engine.getProperty('voices')
-engine.setProperty('voice',voices[1].id)
+engine.setProperty('voice',voices[0].id)
 
 class FirstWindow(Screen,Widget):
   
@@ -67,15 +67,15 @@ class FirstWindow(Screen,Widget):
     def listen(self):
         k = sr.Recognizer()
         with sr.Microphone() as source:
-            print("Listening....")
-            k.pause_threshold == 1
+            self.speak("Listening....")
+            k.pause_threshold == 100
             audio=k.listen(source)
         try:
             self.speak("Recognizing......")
             query=k.recognize_google(audio, language='eng-in')    
-            print(f"user said: ",{query},"\n")
+            print("user said: ",{query},"\n")
         except Exception as e:
-            print("Say that again please....")
+            # print("Say that again please....")
             self.speak("Say that again please....")
             return "None"
         self.ids.mic1.source='mic1.png'
