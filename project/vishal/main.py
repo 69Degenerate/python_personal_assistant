@@ -99,7 +99,7 @@ class SecondWindow(Screen,Widget):
         k = sr.Recognizer()
         with sr.Microphone() as source:
             print("Listening....")
-            k.pause_threshold == 1
+            k.pause_threshold == 100
             audio=k.listen(source)
         try:
             self.speak("Recognizing......")
@@ -108,7 +108,7 @@ class SecondWindow(Screen,Widget):
         except Exception as e:
             print("Say that again please....")
             self.speak("Say that again please....")
-            return "None"
+            return None
         self.ids.mic1.source='mic1.png'
         self.exe(query)
 
