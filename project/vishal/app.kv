@@ -14,40 +14,42 @@ WindowManager:
         id:fp
         pos:0,0
         size:root.width,root.height
-        Label:
-            text:"Welcome"
-            # text_size:15
-            font_size:19
-            pos_hint:{'x':.4,'y':.7}
-            size_hint:None,None
-            size:root.width*.35,root.height*.3
-        Label:
-            text:"(click to contiune)"
-            # text_size:10
-            font_size:12
-            pos_hint:{'x':.4,'y':.6}
-            size_hint:None,None
-            size:root.width*.35,root.height*.3
-        Label:
-            id:massage
-            text:""
-            text_size:self.size
-            pos_hint:{'x':.4,'y':.5}
-            size_hint:None,None
-            size:root.width*.35,root.height*.3
-        Label:
-            id:co
-            text:""
-            font_size:12
-            color: 1 , 0 , 0 , 1
-            pos_hint:{'x':.1,'y':.9}
-            size_hint:None,None
-            size:root.width*.07,root.height*.05
         Button:
             background_color:(0,0,0,0)
             on_release: 
                 app.root.current = "second"
                 root.manager.transition.direction = "left"
+        BoxLayout:
+            orientation:'vertical'
+            Label:
+                text:"Welcome"
+                # text_size:15
+                font_size:27
+                # pos_hint:{'x':.3,'y':.7}
+                # size_hint:None,None
+                # size:root.width*.35,root.height*.3
+            Label:
+                text:"(click to contiune)"
+                # text_size:10
+                font_size:12
+                # pos_hint:{'x':.4,'y':.6}
+                # size_hint:None,None
+                # size:root.width*.35,root.height*.3
+            Label:
+                id:massage
+                text:""
+                # text_size:self.size
+                # pos_hint:{'x':.4,'y':.5}
+                # size_hint:None,None
+                # size:root.width*.35,root.height*.3
+            Label:
+                id:co
+                text:""
+                font_size:12
+                color: 1 , 0 , 0 , 1
+                # pos_hint:{'x':.1,'y':.9}
+                # size_hint:None,None
+                # size:root.width*.07,root.height*.05
 <SecondWindow>:
     name: "second"
     id:g

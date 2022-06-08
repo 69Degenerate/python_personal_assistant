@@ -4,12 +4,12 @@ import turtle
 import pyttsx3
 import speech_recognition as sr
 import datetime
-# import pyaudio
+import pyaudio
 import wikipedia
 import webbrowser
 import os
 import smtplib
-# import googletrans
+import googletrans
 from kivy.config import Config
 from kivy.app import App as a
 from kivy.uix.button import Button as b
@@ -49,6 +49,21 @@ try:
 except:
             p="Not Connected"   
 class FirstWindow(Screen):
+        
+    def display(self,audio,*args):
+        self.ids.massage.text=self.ids.massage.text+"\n"+str(audio)
+        # engine.say(audio)
+        # engine.runAndWait()
+    def wishme(self,*args):
+        hour = int(datetime.datetime.now().hour)
+        self.display("            hello sir ")    
+        if hour>=0 and hour<12:
+            self.display("          Good Morning!")
+        elif hour>=12 and hour<18:
+            self.display("          Good Afternoon!")
+        else:
+            self.display("          Good Evining!")         
+        self.display("i am friday, how may i help you?")    
  
     def c(self,*args):
         if p=="Connected":
@@ -58,11 +73,8 @@ class FirstWindow(Screen):
             self.ids.co.text="not connected to internet"
             self.ids.massage.text=self.ids.massage.text+"\nfuncionality will be limited without internet connnection"
     def on_enter(self):
+        Clock.schedule_once(self.wishme)
         Clock.schedule_once(self.c)
-    # def __init__(self, **kwargs):
-    #     super(FirstWindow,self).__init__(**kwargs)
-    #     Clock.schedule_once(self.c)
-
 
 class SecondWindow(Screen,Widget):
     def scr(self,screen):
@@ -162,7 +174,7 @@ class SecondWindow(Screen,Widget):
             self.ids.f.trigger_action(0.2)
         elif 'third' in query:
             self.ids.t.trigger_action(0.2)
-        elif 'forth' in query:
+        elif 'calculator' in query:
             self.ids.fo.trigger_action(0.2)
         elif 'fifth' in query:
             self.ids.fi.trigger_action(0.2)
@@ -327,6 +339,6 @@ def wishme():
         else:
             speak("Good Evining!")         
         speak("i am friday, how may i help you?")    
-wishme()
+# wishme()
 # FirstWindow.wishme()
 app().run()
